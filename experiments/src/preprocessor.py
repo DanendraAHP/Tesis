@@ -3,6 +3,7 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 import preprocessor as p
 from src.slang_word import SLANG_WORDS
 
+p.set_options(p.OPT.URL, p.OPT.MENTION, p.OPT.HASHTAG, p.OPT.RESERVED, p.OPT.EMOJI, p.OPT.SMILEY)
 class Preprocessor:
     """
     Untuk preprocess sebelum masuk ke fine tuner
@@ -56,7 +57,7 @@ class Preprocessor:
         #clean text with tweet-preprocessor
         text = p.clean(text)
         #clean repetitive word
-        text = " ".join([self.clean_repetitive(word) for word in text.split()])
+        #text = " ".join([self.clean_repetitive(word) for word in text.split()])
         #convert slang word into dictionary
         text = " ".join([SLANG_WORDS[word] if word in SLANG_WORDS else word for word in text.split()])
         return text
